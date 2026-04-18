@@ -5,12 +5,10 @@ TOKEN = "8783853129:AAHL87XXlW9eFnk9uw6uQVJ_Dc1Gk3C3Qc0"
 
 bot = telebot.TeleBot(TOKEN)
 
-ADMIN_IDS = [1061219182, 765930846] 
-
+ADMIN_IDS = [1061219182, 765930846]
 awaiting_suggestion = set()
 
 WELCOME_TEXT = """👋 Привет!
-
 Добро пожаловать, меня зовут Фифи! Я официальный бот команды StudiiNet!
 
 Тут я помогу скачать вам наш дубляж для игр, посмотреть аниме в нашей озвучке и отправить идеи или сообщения о багах в предложку!
@@ -46,21 +44,26 @@ def callback_handler(call):
         btn_episode1 = types.InlineKeyboardButton("Эпизод 1", callback_data="episode1")
         btn_back = types.InlineKeyboardButton("← Назад", callback_data="menu_games")
         markup.add(btn_episode1, btn_back)
-        bot.send_message(chat_id, "**Dispatch**\nВыберите эпизод:", reply_markup=markup, parse_mode="Markdown")
+        bot.send_message(chat_id, "**Dispatch**\n\nВыберите эпизод:", reply_markup=markup, parse_mode="Markdown")
 
     elif call.data == "episode1":
         bot.answer_callback_query(call.id)
-        text = "Dispatch — эпизодическая приключенческая игра, разработанная студией AdHoc Studio в сотрудничестве с Critical Role Productions и анимационной студией Igloo Studio."
+        
+        text = """**Dispatch — Эпизод 1**
+
+Dispatch — это динамичная приключенческая игра в стиле киберпанк, созданная студией AdHoc Studio в сотрудничестве с Critical Role Productions и Igloo Studio.
+
+Вот ссылки на наш дубляж Эпизода 1:"""
 
         markup = types.InlineKeyboardMarkup(row_width=1)
         link1 = types.InlineKeyboardButton("Google Disk", url="https://drive.google.com/drive/folders/1MhKzU_jFra9uB-bOF0H5r-tbz-NoWwaB?usp=sharing")
         link2 = types.InlineKeyboardButton("Yandex Disk", url="https://disk.yandex.ru/d/HPhO-om90NjK3w")
-        link3 = types.InlineKeyboardButton("Mega Пока нету", url="")
+        link3 = types.InlineKeyboardButton("Mega (пока нет)", url="https://mega.nz")
         btn_back = types.InlineKeyboardButton("← Назад к эпизодам", callback_data="dispatch")
         
         markup.add(link1, link2, link3, btn_back)
 
-        bot.send_message(chat_id, text, reply_markup=markup)
+        bot.send_message(chat_id, text, reply_markup=markup, parse_mode="Markdown")
 
     elif call.data == "menu_anime":
         bot.answer_callback_query(call.id)
@@ -69,7 +72,7 @@ def callback_handler(call):
     elif call.data == "menu_suggest":
         bot.answer_callback_query(call.id)
         awaiting_suggestion.add(call.from_user.id)
-        bot.send_message(chat_id, 
+        bot.send_message(chat_id,
                          "💡 Здесь вы можете написать ваши идеи и предложения, "
                          "описать и скинуть баги и т.д.\n\n"
                          "Просто отправьте сообщение, фото, видео, файл или любой другой контент.")
@@ -85,7 +88,7 @@ def callback_handler(call):
 
 
 # Обработка предложки
-@bot.message_handler(content_types=['text', 'photo', 'video', 'document', 'audio', 'voice', 
+@bot.message_handler(content_types=['text', 'photo', 'video', 'document', 'audio', 'voice',
                                    'video_note', 'animation', 'sticker'])
 def handle_suggestion(message):
     if message.from_user.id not in awaiting_suggestion:
