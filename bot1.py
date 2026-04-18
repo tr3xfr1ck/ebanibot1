@@ -12,20 +12,21 @@ ADMIN_IDS = [1061219182]   # твой ID
 # Пользователи, которые сейчас в режиме предложки
 awaiting_suggestion = set()
 
-WELCOME_TEXT = """👋 Привет! Добро пожаловать в наш бот.
+WELCOME_TEXT = """👋 Привет!
 
-Здесь ты можешь:
-• Посмотреть наш дубляж для игр
-• Посмотреть наш дубляж для аниме
-• Предложить идею или сообщить о баге"""
+Добро пожаловать в официальный бот команды **Studii Net**!
+
+Тут вы можете скачать наш дубляж для игр, посмотреть аниме в нашей озвучке и отправить идеи или сообщения о багах в предложку!
+
+Выбирай нужный раздел ниже 👇"""
 
 @bot.message_handler(commands=['start'])
 def start(message):
     markup = types.InlineKeyboardMarkup(row_width=1)
 
-    btn_games = types.InlineKeyboardButton("🎮 Наш дубляж для игр", callback_data="menu_games")
-    btn_anime = types.InlineKeyboardButton("🌸 Наш дубляж для аниме", callback_data="menu_anime")
-    btn_suggest = types.InlineKeyboardButton("💡 Предложка для идей и багов", callback_data="menu_suggest")
+    btn_games = types.InlineKeyboardButton("Наш дубляж для игр", callback_data="menu_games")
+    btn_anime = types.InlineKeyboardButton("Наш дубляж для аниме", callback_data="menu_anime")
+    btn_suggest = types.InlineKeyboardButton("Предложка для идей и багов", callback_data="menu_suggest")
 
     markup.add(btn_games, btn_anime, btn_suggest)
 
@@ -53,9 +54,9 @@ def callback_handler(call):
         bot.answer_callback_query(call.id)
         text = "Dispatch от студии нет, вот 3 ссылки для вашего удобства:"
         markup = types.InlineKeyboardMarkup(row_width=1)
-        link1 = types.InlineKeyboardButton("Ссылка 1", url="https://example.com/link1")
-        link2 = types.InlineKeyboardButton("Ссылка 2", url="https://example.com/link2")
-        link3 = types.InlineKeyboardButton("Ссылка 3", url="https://example.com/link3")
+        link1 = types.InlineKeyboardButton("Google Disk", url="https://example.com/link1")
+        link2 = types.InlineKeyboardButton("Yandex Disk", url="https://example.com/link2")
+        link3 = types.InlineKeyboardButton("Mega Disk", url="https://example.com/link3")
         btn_back = types.InlineKeyboardButton("← Назад", callback_data="menu_games")
         markup.add(link1, link2, link3, btn_back)
         bot.send_message(chat_id, text, reply_markup=markup)
@@ -75,9 +76,9 @@ def callback_handler(call):
     elif call.data == "back_to_main":
         bot.answer_callback_query(call.id)
         markup = types.InlineKeyboardMarkup(row_width=1)
-        btn_games = types.InlineKeyboardButton("🎮 Наш дубляж для игр", callback_data="menu_games")
-        btn_anime = types.InlineKeyboardButton("🌸 Наш дубляж для аниме", callback_data="menu_anime")
-        btn_suggest = types.InlineKeyboardButton("💡 Предложка для идей и багов", callback_data="menu_suggest")
+        btn_games = types.InlineKeyboardButton("Наш дубляж для игр", callback_data="menu_games")
+        btn_anime = types.InlineKeyboardButton("Наш дубляж для аниме", callback_data="menu_anime")
+        btn_suggest = types.InlineKeyboardButton("Предложка для идей и багов", callback_data="menu_suggest")
         markup.add(btn_games, btn_anime, btn_suggest)
         bot.send_message(chat_id, WELCOME_TEXT, reply_markup=markup)
 
@@ -107,7 +108,7 @@ def handle_suggestion(message):
 
     bot.send_message(message.chat.id,
                      "✅ Спасибо! Ваше предложение отправлено админам.\n"
-                     "Мы обязательно его рассмотрим.")
+                     "Мы обязательно его рассмотрим и дадим вам фидбек!.")
 
 
 print("✅ Бот успешно запущен! Предложка работает")
