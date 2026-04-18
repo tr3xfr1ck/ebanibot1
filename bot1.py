@@ -5,7 +5,7 @@ TOKEN = "8783853129:AAHL87XXlW9eFnk9uw6uQVJ_Dc1Gk3C3Qc0"
 
 bot = telebot.TeleBot(TOKEN)
 
-ADMIN_IDS = [1061219182]
+ADMIN_IDS = [1061219182, 765930846] 
 
 awaiting_suggestion = set()
 
@@ -50,12 +50,11 @@ def callback_handler(call):
 
     elif call.data == "episode1":
         bot.answer_callback_query(call.id)
-        text = "Dispatch от студии нет, вот 3 ссылки для вашего удобства:"
+        text = "Dispatch — эпизодическая приключенческая игра, разработанная студией AdHoc Studio в сотрудничестве с Critical Role Productions и анимационной студией Igloo Studio."
 
         markup = types.InlineKeyboardMarkup(row_width=1)
-        link1 = types.InlineKeyboardButton("Google Disk", url="https://example.com/link1")
-        link2 = types.InlineKeyboardButton("Yandex Disk", url="https://example.com/link2")
-        link3 = types.InlineKeyboardButton("Mega Disk", url="https://example.com/link3")
+        link1 = types.InlineKeyboardButton("Google Disk", url="https://drive.google.com/drive/folders/1MhKzU_jFra9uB-bOF0H5r-tbz-NoWwaB?usp=sharing")
+        link2 = types.InlineKeyboardButton("Yandex Disk", url="https://disk.yandex.ru/d/HPhO-om90NjK3w")
         btn_back = types.InlineKeyboardButton("← Назад к эпизодам", callback_data="dispatch")
         
         markup.add(link1, link2, link3, btn_back)
