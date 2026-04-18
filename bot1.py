@@ -55,7 +55,7 @@ def callback_handler(call):
         markup = types.InlineKeyboardMarkup(row_width=1)
         link1 = types.InlineKeyboardButton("Google Disk", url="https://drive.google.com/drive/folders/1MhKzU_jFra9uB-bOF0H5r-tbz-NoWwaB?usp=sharing")
         link2 = types.InlineKeyboardButton("Yandex Disk", url="https://disk.yandex.ru/d/HPhO-om90NjK3w")
-        link3 = types.InlineKeyboardButton("Ссылка 3", url="https://example.com/link3")
+        link3 = types.InlineKeyboardButton("Mega Пока нету", url="")
         btn_back = types.InlineKeyboardButton("← Назад к эпизодам", callback_data="dispatch")
         
         markup.add(link1, link2, link3, btn_back)
